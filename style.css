@@ -1,7 +1,6 @@
 body {
   text-align: center;
-  background: url("https://res.cloudinary.com/jutzee/image/upload/v1534883464/arcade-game/background%20-%20arctic.png")
-    center / cover no-repeat fixed;
+  background: url("Selva.jpg") center / cover no-repeat fixed;
   font-family: "Mina", cursive;
 }
 
@@ -21,13 +20,15 @@ body {
 }
 
 .heart {
-  height: 60px;
+  width: 40px;
+  height: 40px;
   margin: auto 10px;
 }
 
 .timer {
   display: grid;
   grid-template: 100% / 20% 20% 20% 20% 20%;
+  color: white;
 }
 
 .minCount,
@@ -57,6 +58,7 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color:white;
 }
 
 canvas {
@@ -147,6 +149,7 @@ canvas {
 .pause-img {
   width: 180px;
   margin: 30px;
+  
 }
 
 .fish {
@@ -163,3 +166,5 @@ canvas {
 .instruction-text {
   text-align: center;
 }
+
+

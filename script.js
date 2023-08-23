@@ -132,23 +132,23 @@ let pauseScreen;
 
 // sound and music
 const mainMusic = new Audio(
-  "https://res.cloudinary.com/jutzee/video/upload/v1534884142/arcade-game/main.mp3"
+  "./fondo.mp3"
 );
 mainMusic.loop = true;
 const fishSound = new Audio(
-  "https://res.cloudinary.com/jutzee/video/upload/v1534884181/arcade-game/fish%20-%20sound.wav"
+  "./banana - sound.wav"
 );
 const hurtSound = new Audio(
-  "https://res.cloudinary.com/jutzee/video/upload/v1534884138/arcade-game/hurt.wav"
+  "./hurt.mp3"
 );
 const babySound = new Audio(
-  "https://res.cloudinary.com/jutzee/video/upload/v1534884169/arcade-game/baby.wav"
+  "./baby.wav"
 );
 const gameOverSound = new Audio(
-  "https://res.cloudinary.com/jutzee/video/upload/v1534884138/arcade-game/game_over.wav"
+  "./game_over.mp3"
 );
 const winSound = new Audio(
-  "https://res.cloudinary.com/jutzee/video/upload/v1534884140/arcade-game/win.wav"
+  "./win.wav"
 );
 const allSounds = [
   mainMusic,
@@ -200,13 +200,11 @@ class Player extends Character {
           this.x = 3;
           this.y = 1;
           this.life--;
-          this.sprite =
-            "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player.png";
+          this.sprite = "./mono.png";
           if (this.grab === true) {
             this.fish.x = this.fish.originalX;
             this.fish.y = this.fish.originalY;
-            this.fish.sprite =
-              "https://res.cloudinary.com/jutzee/image/upload/v1534883496/arcade-game/fish%20-%20img.png";
+            this.fish.sprite = "./bananasmall.png";
             this.fish.grabbed = false;
             this.grab = false;
           }
@@ -226,16 +224,13 @@ class Player extends Character {
     if (key === "up" && this.y - 1 > 0) {
       this.y--;
       if (this.y === 1) {
-        this.sprite =
-          "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player.png";
+        this.sprite = "./mono.png";
       } else {
-        this.sprite =
-          "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player-swim-up.png";
+        this.sprite = "./mono.png";
       }
       if (this.grab === true) {
         this.fish.y--;
-        this.fish.sprite =
-          "https://res.cloudinary.com/jutzee/image/upload/v1534883496/arcade-game/fish%20-%20img.png";
+        this.fish.sprite = "./bananasmall.png";
       }
     } else if (
       key === "down" &&
@@ -243,34 +238,27 @@ class Player extends Character {
     ) {
       this.y++;
       if (this.y === 2) {
-        this.sprite =
-          "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player-swim-up.png";
+        this.sprite = "./mono.png"; //moverhacia arriba
       } else {
-        this.sprite =
-          "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player-swim-down.png";
+        this.sprite = "./mono.png"; // mover hacia abajo
       }
       if (this.grab === true) {
         this.fish.y++;
-        this.fish.sprite =
-          "https://res.cloudinary.com/jutzee/image/upload/v1534883496/arcade-game/fish-swim-down.png";
+        this.fish.sprite = "./bananasmall.png";
       }
     } else if (key === "left" && this.x - 1 >= 0) {
       this.x--;
       if (this.y === 1) {
-        this.sprite =
-          "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player.png";
+        this.sprite = "./mono.png";
       } else {
-        this.sprite =
-          "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player-swim-left.png";
+        this.sprite = "./mono.png"; // moverse hacia la izquierda
       }
       if (this.grab === true) {
         this.fish.x--;
         if (this.y === 1) {
-          this.fish.sprite =
-            "https://res.cloudinary.com/jutzee/image/upload/v1534883496/arcade-game/fish%20-%20img.png";
+          this.fish.sprite = "./bananasmall.png";
         } else {
-          this.fish.sprite =
-            "https://res.cloudinary.com/jutzee/image/upload/v1534883496/arcade-game/fish-swim-left.png";
+          this.fish.sprite = "./bananasmall.png";
         }
       }
     } else if (
@@ -279,20 +267,16 @@ class Player extends Character {
     ) {
       this.x++;
       if (this.y === 1) {
-        this.sprite =
-          "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player.png";
+        this.sprite = "./mono.png";
       } else {
-        this.sprite =
-          "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player-swim-right.png";
+        this.sprite = "./mono.png";
       }
       if (this.grab === true) {
         this.fish.x++;
         if (this.y === 1) {
-          this.fish.sprite =
-            "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player-swim-right.png";
+          this.fish.sprite = "./mono.png"; //Moverse hacia la derecha
         } else {
-          this.fish.sprite =
-            "https://res.cloudinary.com/jutzee/image/upload/v1534883496/arcade-game/fish-swim-right.png";
+          this.fish.sprite = "./bananasmall.png";
         }
       }
     }
@@ -301,7 +285,7 @@ class Player extends Character {
       this.grab === false &&
       allFish.find((a) => a.x === this.x && a.y === this.y) !== undefined
     ) {
-      let grabbedFish = allFish.find((a) => a.x === this.x && a.y === this.y);
+      let grabbedFish = allFish.find((a) => a.x === this.x && a.y  === this.y);
       this.grab = true;
       grabbedFish.grabbed = true;
       this.fish = grabbedFish;
@@ -392,7 +376,7 @@ class Kids extends Character {
       player.fish.y -= 0.5;
       let k = this;
       setTimeout(function () {
-        k.y += 0.5;
+        k.y += 0.5; // cuando se le da una banana a el mono con el signo (-) se va, con el signo(+) se queda
         player.fish.y += 0.5;
       }, 200);
       this.jump = false;
@@ -432,48 +416,26 @@ function shuffle(array) {
 
 // - - - - INSTANTIATE CHARACTERS
 // player character
-let player = new Player(
-  "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player.png",
-  3,
-  1
-);
+let player = new Player("./mono.png", 3, 1);
 
 // enemies
 for (let i = 0; i < 7; i++) {
-  let e = new Enemy(
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883495/arcade-game/enemy-seal.png",
-    "right",
-    2,
-    2,
-    3,
-    6
-  );
+  let e = new Enemy("./Serpiente.png", "right", 2, 2, 3, 6);
   allEnemies.push(e);
 }
-let polar = new Enemy(
-  "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/polar.png",
-  "left",
-  2,
-  1,
-  2,
-  2
-);
+let polar = new Enemy("./Jaguar.png", "left", 2, 1, 2, 2);
 allEnemies.push(polar);
 
 // baby penguins
 for (let j = 0; j < 7; j++) {
-  let k = new Kids(
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883462/arcade-game/baby-penguin.png",
-    j,
-    0
-  );
+  let k = new Kids("./babymono.png", j, 0);
   allKids.push(k);
 }
 
 // fish
 for (let k = 0; k < 7; k++) {
   let f = new Fish(
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883496/arcade-game/fish%20-%20img.png",
+    "./bananasmall.png",
     fishX[k],
     Math.floor(Math.random() * (6 - 3 + 1) + 3)
   );
@@ -519,13 +481,14 @@ start();
 // - - - - START SCREEN - - - -
 function start() {
   // CREATE START SCREEN
+
   start = document.createElement("DIV");
   start.classList.add("start");
 
   // add header
   let startHeader = document.createElement("H1");
   startHeader.classList.add("startHeader");
-  startHeader.textContent = "How to play?";
+  startHeader.textContent = "¿Cómo se juega?";
 
   // add info about the game
   let instructions = document.createElement("DIV");
@@ -535,35 +498,35 @@ function start() {
 
   let fishImage = document.createElement("IMG");
   fishImage.classList.add("fish");
-  fishImage.src =
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883496/arcade-game/fish-small.png";
+  fishImage.src = "./bananasmall.png";
 
   let firstLineText = document.createElement("H2");
   firstLineText.classList.add("instruction-first-line");
-  firstLineText.textContent = "Collect fish for the baby penguins.";
+  firstLineText.textContent = "Recoge bananas para las crías de mono.";
 
   firstLine.append(fishImage, firstLineText);
 
   let secondLine = document.createElement("H2");
   secondLine.classList.add("instruction-text");
-  secondLine.textContent = "When all the little ones have a fish, you win!";
+  secondLine.textContent =
+    "Cuando todos los pequeños tengan una banana, ¡tú ganas!";
 
   let thirdLine = document.createElement("H2");
   thirdLine.classList.add("instruction-text");
   thirdLine.textContent =
-    "You can move with the arrow keys (← ↑ → ↓) but make sure you avoid enemies.";
+    "Puedes moverte con las flechas del teclado (← ↑ → ↓) pero asegúrate de evitar a los enemigos.";
 
   instructions.append(firstLine, secondLine, thirdLine);
 
   // add new game button
   let startGameButton = document.createElement("DIV");
   startGameButton.classList.add("startGameButton");
-  startGameButton.textContent = "Start game";
+  startGameButton.textContent = "Comenzar el juego";
 
   // add key press comment
   let startGameComment = document.createElement("H3");
   startGameComment.classList.add("startGameComment");
-  startGameComment.textContent = "or press any key";
+  startGameComment.textContent = "Pulse cualquier tecla";
 
   start.append(startHeader, instructions, startGameButton, startGameComment);
 
@@ -661,8 +624,7 @@ function restart() {
     for (let m = 0; m < addLife; m++) {
       let heart = document.createElement("IMG");
       heart.classList.add("heart");
-      heart.src =
-        "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/Heart.png";
+      heart.src = "./heart.png";
       fragment.appendChild(heart);
     }
     document.querySelector(".life").appendChild(fragment);
@@ -710,11 +672,11 @@ function pause() {
   pauseScreen.classList.add("pause-screen");
 
   let pauseText = document.createElement("H1");
-  pauseText.textContent = "Game paused";
+  pauseText.textContent = "Juego pausado";
   pauseScreen.appendChild(pauseText);
 
   let pauseComment = document.createElement("H3");
-  pauseComment.textContent = "press any key or click to return";
+  pauseComment.textContent = "pulse cualquier tecla o haga clic para volver";
   pauseScreen.appendChild(pauseComment);
 
   document.body.appendChild(pauseScreen);
@@ -815,26 +777,26 @@ function win() {
   // add header
   let wonHeader = document.createElement("H1");
   wonHeader.classList.add("winnerHeader");
-  wonHeader.textContent = "Congratulation!";
+  wonHeader.textContent = "¡Felicidades!";
 
   // add info about the game
   let wonText = document.createElement("H2");
   wonText.classList.add("winnerText");
   let wonInfo =
     minCounter === 0
-      ? "You won in " + secCounter + " sec!"
-      : "You won in " + minCounter + " min " + secCounter + " sec!";
+      ? "Ganaste en " + secCounter + " seg!"
+      : "Ganaste en " + minCounter + " min " + secCounter + " seg!";
   wonText.textContent = wonInfo;
 
   // add new game button
   let newGameButton = document.createElement("DIV");
   newGameButton.classList.add("newGameButton");
-  newGameButton.textContent = "Play again?";
+  newGameButton.textContent = "¿Jugar otra vez?";
 
   // add press key comment
   let newGameComment = document.createElement("H3");
   newGameComment.classList.add("newGameComment");
-  newGameComment.textContent = "or press any key";
+  newGameComment.textContent = "Pulse cualquier tecla";
 
   won.append(wonHeader, wonText, newGameButton, newGameComment);
 
@@ -869,17 +831,17 @@ function loose() {
   // add header
   let lostHeader = document.createElement("H1");
   lostHeader.classList.add("lostHeader");
-  lostHeader.textContent = "GAME OVER";
+  lostHeader.textContent = "Juego Terminado";
 
   // add new game button
   let newGameButton = document.createElement("DIV");
   newGameButton.classList.add("newGameButton");
-  newGameButton.textContent = "Play again?";
+  newGameButton.textContent = "¿Jugar otra vez?";
 
   // add key press comment
   let newGameComment = document.createElement("H3");
   newGameComment.classList.add("newGameComment");
-  newGameComment.textContent = "or press any key";
+  newGameComment.textContent = "Pulse cualquier tecla";
 
   lost.append(lostHeader, newGameButton, newGameComment);
 
@@ -1006,13 +968,13 @@ var Engine = (function (global) {
      * for that particular row of the game level.
      */
     var rowImages = [
-        "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/snow-block.png",
-        "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/snow-block.png",
-        "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/water-block.png",
-        "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/water-block.png",
-        "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/water-block.png",
-        "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/water-block.png",
-        "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/water-block.png",
+        "./Pastoverde.png",
+        "./Pastoverde.png",
+        "./Suelo1.png",
+        "./Suelo1.png",
+        "./Suelo1.png",
+        "./Suelo1.png",
+        "./Suelo.png",
       ],
       numRows = 7,
       numCols = 7,
@@ -1035,7 +997,7 @@ var Engine = (function (global) {
          * so that we get the benefits of caching these images, since
          * we're using them over and over.
          */
-        ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+        ctx.drawImage(Resources.get(rowImages[row]), col * 97, row * 83);
       }
     }
 
@@ -1079,21 +1041,15 @@ var Engine = (function (global) {
    * all of these images are properly loaded our game will start.
    */
   Resources.load([
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/snow-block.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/water-block.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883462/arcade-game/baby-penguin.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player-swim-up.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player-swim-down.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player-swim-left.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/player-swim-right.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883495/arcade-game/enemy-seal.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883518/arcade-game/polar.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883496/arcade-game/fish%20-%20img.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883496/arcade-game/fish-swim-down.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883496/arcade-game/fish-swim-left.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883496/arcade-game/fish-swim-right.png",
-    "https://res.cloudinary.com/jutzee/image/upload/v1534883496/arcade-game/fish-small.png",
+    "./Pastoverde.png",
+    "./Suelo.png",
+    "./Suelo1.png",
+    "./babymono.png",
+    "./mono.png",,
+    "./Serpiente.png",
+    "./Jaguar.png",
+    "./bananasmall.png"
+    
   ]);
   Resources.onReady(init);
 
