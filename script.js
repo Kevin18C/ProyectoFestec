@@ -523,12 +523,18 @@ function start() {
   startGameButton.classList.add("startGameButton");
   startGameButton.textContent = "Comenzar el juego";
 
+    // acerca de nostros
+    let botonAcerca = document.createElement("DIV");
+    botonAcerca.classList.add("startGameButton");
+    botonAcerca.textContent = "Acerca de Nosotros";
+
+
   // add key press comment
   let startGameComment = document.createElement("H3");
   startGameComment.classList.add("startGameComment");
   startGameComment.textContent = "Pulse cualquier tecla";
 
-  start.append(startHeader, instructions, startGameButton, startGameComment);
+  start.append(startHeader, instructions, startGameButton, startGameComment, botonAcerca);
 
   document.body.appendChild(start);
 
@@ -540,8 +546,23 @@ function start() {
     startGame();
   };
 
+  botonAcerca.onclick = function () {
+    acerca();
+  };
+
+  window.addEventListener("keypress", acerca, false);
+
+  function acerca(){
+    
+    window.location.href = "acerca.html"
+  
+  }
+
   window.addEventListener("keypress", startGame, false);
+
 }
+
+
 
 // - - - - START GAME - - - -
 function startGame() {

@@ -1,0 +1,22 @@
+h1{
+    margin: 100;
+    padding: 0%;
+    width: 100%;
+    color: rgb(156, 69, 11);
+    text-align: center;
+    
+}
+
+
+
+main{
+
+    display: block;
+    padding-top: 200px;
+}
+
+p{
+    
+    text-align: center;
+    color:rgb(0, 0, 0);
+}
