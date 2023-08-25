@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a39aeb331d.js" crossorigin="anonymous"></script>
+    <title>wild hunt game</title>
+    <link rel="stylesheet" href="style-inicio.css">
+</head>
+<body>
+      <!-- encabezado -->
+    <header>  
+        <div class="navbar">
+            <div class="logo"><a href = "inicio.html" >
+                Wild Hunt Game
+            </a>
+            </div>
+            <ul class="links">
+                <li><a href="intrucciones.html">Instrucciones</a></li>
+                <li><a href="index.html">Juego</a></li>
+                <li><a href="acerca.html">Sobre nosostros</a></li>
+            </ul>
+            <div class="nav_bton">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+        <div class="dropdown_menu">
+            <li><a href="inicio.html">Inicio</a></li>
+            <li><a href="">Instrucciones</a></li>
+            <li><a href="index.html">Juego</a></li>
+            <li><a href="acerca.html">Sobre nosostros</a></li>
+            
+        </div>
+    </header>
+    <!-- cuerpo del texto -->
+    <main>
+        <div class="sec">
+            <div class="imgJuego">
+                <img src="img-juego.png" alt="">
+            </div>
+            <div class="ContenidoJuego">
+                <div class="contenido">
+                    <span class="texto">
+                        <span></span> Juego Interactivo
+                    </span>
+                        <h2>Monkey in the jungle</h2>
+                        <p>K.O, es un monito que intentará llevar bananos a sus hermanos menores
+                            por lo cual necesitará de ayuda para lograrlo.¿Ayudarás a K.O a lograrlo?
+                        </p>
+                        
+                        <a href="index.html">Inicia a jugar</a>
+                </div>
+
+            </div>
+    
+        </div>
+
+    </main>
+    <!-- pie de pagina -->
+    <footer class="footerContenedor">
+        <div class="footerBoton">
+            <p>Copyright &copy;2023; Diseñado por<span class="diseñadores">K,O,H,H,J,J</span></p>
+        </div>
+    </footer>
+    <script>
+        const navBton=document.querySelector('.nav_bton')
+        const navBtonIcon=document.querySelector('.nav_bton i')
+        const dropDown_menu=document.querySelector('.dropdown_menu')
+     
+        navBton.onclick=function(){
+            dropDown_menu.classList.toggle('open')
+            const isOpen=dropDown_menu.classList.contains('open')
+
+            navBtonIcon.classList=isOpen
+            ? 'fa-solid fa-xmark'
+            : 'fa-solid fa-bars'
+        }
+    </script>
+
+</body>
+</html>
