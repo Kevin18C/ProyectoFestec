@@ -1,7 +1,11 @@
+@font-face {
+  font-family: fuenteContenido ;
+  src: url(font-Minecraft.ttf);
+}
 body {
   text-align: center;
   background: url("Selva.jpg") center / cover no-repeat fixed;
-  font-family: "Mina", cursive;
+  font-family:  fuenteContenido;
 }
 
 .panel {
@@ -28,7 +32,7 @@ body {
 .timer {
   display: grid;
   grid-template: 100% / 20% 20% 20% 20% 20%;
-  color: white;
+  color: rgb(5, 5, 5);
 }
 
 .minCount,
@@ -58,7 +62,7 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color:white;
+  color: rgba(149, 243, 177, 0.9);
 }
 
 canvas {
@@ -82,7 +86,7 @@ canvas {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(149, 243, 177, 0.9);
   color: #270555;
   animation: fadeIn 0.8s;
 }
@@ -111,7 +115,7 @@ canvas {
 
 .startGameButton:hover,
 .newGameButton:hover {
-  background-color: #003363;
+  background-color: #030303;
   box-shadow: none;
 }
 

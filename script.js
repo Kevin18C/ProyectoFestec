@@ -1,60 +1,60 @@
-/* Resources.js
- * This is simply an image loading utility. It eases the process of loading
- * image files so that they can be used within your game. It also includes
- * a simple "caching" layer so it will reuse cached images if you attempt
- * to load the same image multiple times.
+/* Recursos.js
+ * Esta es simplemente una utilidad de carga de imágenes. Facilita el proceso de carga
+ * archivos de imagen para que puedan ser utilizados dentro de su juego. También incluye
+ * una simple capa de "caché" para reutilizar las imágenes en caché si se intenta
+ * cargar la misma imagen varias veces.
  */
 (function () {
   var resourceCache = {};
   var loading = [];
   var readyCallbacks = [];
 
-  /* This is the publicly accessible image loading function. It accepts
-   * an array of strings pointing to image files or a string for a single
-   * image. It will then call our private image loading function accordingly.
+  /*Esta es la función de carga de imágenes de acceso público. Acepta
+   * una matriz de cadenas que apuntan a archivos de imagen o una cadena para una sola
+   * imagen. Entonces llamará a nuestra función privada de carga de imágenes.
    */
   function load(urlOrArr) {
     if (urlOrArr instanceof Array) {
-      /* If the developer passed in an array of images
-       * loop through each value and call our image
-       * loader on that image file
+      /* Si el desarrollador pasa un array de imágenes
+       * bucle a través de cada valor y llamar a nuestra imagen
+       * cargador en ese archivo de imagen
        */
       urlOrArr.forEach(function (url) {
         _load(url);
       });
     } else {
-      /* The developer did not pass an array to this function,
-       * assume the value is a string and call our image loader
-       * directly.
+      /* El desarrollador no pasó un array a esta función,
+       * asume que el valor es una cadena y llama a nuestro cargador de imágenes
+       * directamente.
        */
       _load(urlOrArr);
     }
   }
 
-  /* This is our private image loader function, it is
-   * called by the public image loader function.
+  /* Esta es nuestra función privada del cargador de imágenes, es
+   * llamada por la función pública del cargador de imágenes.
    */
   function _load(url) {
     if (resourceCache[url]) {
-      /* If this URL has been previously loaded it will exist within
-       * our resourceCache array. Just return that image rather
-       * re-loading the image.
+      /* Si esta URL ha sido cargada previamente existirá dentro de
+       * nuestra matriz resourceCache. Simplemente devuelva esa imagen en lugar de
+       * recargar la imagen.
        */
       return resourceCache[url];
     } else {
-      /* This URL has not been previously loaded and is not present
-       * within our cache; we'll need to load this image.
+      /* Esta URL no ha sido cargada previamente y no está presente
+       * en nuestra caché; tendremos que cargar esta imagen.
        */
       var img = new Image();
       img.onload = function () {
-        /* Once our image has properly loaded, add it to our cache
-         * so that we can simply return this image if the developer
-         * attempts to load this file in the future.
+        /* Una vez que nuestra imagen se ha cargado correctamente, añadirlo a nuestra caché
+         * para que podamos simplemente devolver esta imagen si el desarrollador
+         * intenta cargar este archivo en el futuro.
          */
         resourceCache[url] = img;
 
-        /* Once the image is actually loaded and properly cached,
-         * call all of the onReady() callbacks we have defined.
+        /* Una vez que la imagen está cargada y almacenada en caché,
+         * llamar a todos los onReady() callbacks que hemos definido.
          */
         if (isReady()) {
           readyCallbacks.forEach(function (func) {
@@ -63,25 +63,25 @@
         }
       };
 
-      /* Set the initial cache value to false, this will change when
-       * the image's onload event handler is called. Finally, point
-       * the image's src attribute to the passed in URL.
+      /*Establece el valor inicial de la caché en false, esto cambiará cuando
+       * se llame al manejador del evento onload de la imagen. Finalmente, apunta
+       * el atributo src de la imagen a la URL pasada.
        */
       resourceCache[url] = false;
       img.src = url;
     }
   }
 
-  /* This is used by developers to grab references to images they know
-   * have been previously loaded. If an image is cached, this functions
-   * the same as calling load() on that URL.
+  /* Esto es utilizado por los desarrolladores para agarrar referencias a las imágenes que saben
+   * han sido cargadas previamente. Si una imagen se almacena en caché, esto funciona
+   * lo mismo que llamar a load() en esa URL.
    */
   function get(url) {
     return resourceCache[url];
   }
 
-  /* This function determines if all of the images that have been requested
-   * for loading have in fact been properly loaded.
+  /* Tsta función determina si todas las imágenes que se han solicitado
+   * para su carga se han cargado correctamente.
    */
   function isReady() {
     var ready = true;
@@ -93,15 +93,15 @@
     return ready;
   }
 
-  /* This function will add a function to the callback stack that is called
-   * when all requested images are properly loaded.
+  /* Esta función añadirá una función a la pila de llamadas de retorno que se llama
+   * cuando todas las imágenes solicitadas se hayan cargado correctamente.
    */
   function onReady(func) {
     readyCallbacks.push(func);
   }
 
-  /* This object defines the publicly accessible functions available to
-   * developers by creating a global Resources object.
+  /* Este objeto define las funciones de acceso público disponibles para
+   * desarrolladores mediante la creación de un objeto global Resources.
    */
   window.Resources = {
     load: load,
@@ -113,24 +113,24 @@
 
 ("use strict");
 // - - - - VARIABLES - - - -
-// characters
+// Personajes
 const allEnemies = [];
 const allKids = [];
 const allFish = [];
 
-// counters
+// contador
 let fishCounter = 0;
 let timing;
 let time = false;
 let secCounter = 0;
 let minCounter = 0;
 
-// screens
+// pantallas
 let won;
 let lost;
 let pauseScreen;
 
-// sound and music
+// sonidos y música
 const mainMusic = new Audio(
   "./fondo.mp3"
 );
@@ -160,8 +160,8 @@ const allSounds = [
 ];
 let muted = false;
 
-// - - - - CHARACTER - - - -
-// basic character class
+// - - - - Personaje - - - -
+// clase de personaje básico
 class Character {
   constructor(sprite, x, y) {
     this.x = x;
@@ -174,7 +174,7 @@ class Character {
   }
 }
 
-// - - - - PLAYER CHARACTER - - - -
+// - - - - jugdor - - - -
 class Player extends Character {
   constructor(sprite, x, y) {
     super(sprite, x, y);
@@ -183,7 +183,7 @@ class Player extends Character {
     this.life = 3;
   }
 
-  // check for collision with enemies - loose life and fish if player was holding it
+  // comprobar colisión con enemigos - perder vida y pez si el jugador lo estaba sujetando
   update() {
     allEnemies.forEach(
       function (enemy) {
@@ -219,7 +219,7 @@ class Player extends Character {
     );
   }
 
-  // move player on game screen
+  // mover al jugador en la pantalla de juego
   handleInput(key) {
     if (key === "up" && this.y - 1 > 0) {
       this.y--;
@@ -280,7 +280,7 @@ class Player extends Character {
         }
       }
     }
-    // grab a fish if on same block
+    // agarra un banano si está en la misma manzana
     if (
       this.grab === false &&
       allFish.find((a) => a.x === this.x && a.y === this.y) !== undefined
@@ -291,7 +291,7 @@ class Player extends Character {
       this.fish = grabbedFish;
       fishSound.play();
     }
-    // pass a fish to baby penguin if beneath one without a fish
+    // pasa un banano a la cría de mono si está debajo de uno sin banano
     if (this.grab === true && this.y === 1) {
       let kidAbove = allKids.find((b) => b.x === this.x);
       if (kidAbove.hasFish === false) {
@@ -302,7 +302,7 @@ class Player extends Character {
         kidAbove.jump = true;
         this.fish.grabbed = false;
         fishCounter++;
-        // if 7 fish is passed to baby penguin, the player wins
+        // si se pasan 7 bananos al bebé mono, el jugador gana
         if (fishCounter === 7) {
           disable();
           setTimeout(function () {
@@ -314,8 +314,8 @@ class Player extends Character {
   }
 }
 
-// - - - - INPUT HANDLER - - - -
-// This listens for key presses and sends the keys to Player.handleInput() method
+// - - - INPUT HANDLER - - - -
+// Escucha las pulsaciones de teclas y las envía al método Player.handleInput()
 function movement(e) {
   const allowedKeys = {
     37: "left",
@@ -326,8 +326,8 @@ function movement(e) {
   player.handleInput(allowedKeys[e.keyCode]);
 }
 
-// - - - - ENEMIES - - - -
-// our player must avoid
+// - - - - Enemigos - - - -
+// nuestro jugador debe evitar
 class Enemy extends Character {
   constructor(sprite, direction, length, speed, min, max) {
     super(sprite);
@@ -344,8 +344,8 @@ class Enemy extends Character {
     this.max = max;
   }
 
-  // Update the enemy's position
-  // Parameter: dt, a time delta between ticks
+  // Actualizar la posición del enemigo
+  // Parámetro: dt, un delta de tiempo entre ticks
   update(dt) {
     this.x = this.x + -1 * this.direction * this.speed * dt;
     if (
@@ -361,7 +361,7 @@ class Enemy extends Character {
   }
 }
 
-// - - - - BABY PENGUINS to feed - - - -
+// - - - - babe mono to feed - - - -
 class Kids extends Character {
   constructor(sprite, x, y) {
     super(sprite, x, y);
@@ -384,7 +384,7 @@ class Kids extends Character {
   }
 }
 
-// - - - - FISH to collect - - - -
+// - - - - Coleccion de bananos- - - -
 class Fish extends Character {
   constructor(sprite, x, y) {
     super(sprite, x, y);
@@ -396,10 +396,10 @@ class Fish extends Character {
   }
 }
 
-// shuffle array to randomize fish's x position
+// barajar la matriz para aleatorizar la posición x del banano
 let fishX = shuffle([0, 1, 2, 3, 4, 5, 6]);
 
-// - - - - SHUFFLE FUNCTION to randomize order of characters - - - -
+// - - - - FUNCIÓN SHUFFLE para aleatorizar el orden de los caracteres - - - -
 function shuffle(array) {
   let currentIndex = array.length,
     temporaryValue,
@@ -414,11 +414,11 @@ function shuffle(array) {
   return array;
 }
 
-// - - - - INSTANTIATE CHARACTERS
-// player character
+// - - - - Inicializar personajes
+// jugador
 let player = new Player("./mono.png", 3, 1);
 
-// enemies
+// enemigos
 for (let i = 0; i < 7; i++) {
   let e = new Enemy("./Serpiente.png", "right", 2, 2, 3, 6);
   allEnemies.push(e);
@@ -426,13 +426,13 @@ for (let i = 0; i < 7; i++) {
 let polar = new Enemy("./Jaguar.png", "left", 2, 1, 2, 2);
 allEnemies.push(polar);
 
-// baby penguins
+// bebe mono
 for (let j = 0; j < 7; j++) {
   let k = new Kids("./babymono.png", j, 0);
   allKids.push(k);
 }
 
-// fish
+// banano
 for (let k = 0; k < 7; k++) {
   let f = new Fish(
     "./bananasmall.png",
@@ -442,22 +442,22 @@ for (let k = 0; k < 7; k++) {
   allFish.push(f);
 }
 
-// - - - - TIMER - - - -
+// - - - - Tiempo- - - -
 function timer() {
   if (time === false) {
     time = true;
     timing = setInterval(function () {
       secCounter++;
-      // add leading zero to seconds
+      //añadir un cero inicial a los segundos
       if (String(secCounter).length === 1) {
         secCounter = "0" + secCounter;
       }
-      // if seconds reaches 60 reset seconds, increment minutes
+      // si segundos llega a 60 reiniciar segundos, incrementar minutos
       if (secCounter === 60) {
         secCounter = "00";
         document.querySelector(".secCount").textContent = secCounter;
         minCounter++;
-        // add leading zero to minutes
+        // añadir un cero inicial a los minutos
         if (String(minCounter).length === 1) {
           minCounter = "0" + minCounter;
         }
@@ -475,22 +475,22 @@ function stopTimer() {
     time = false;
   }
 }
-// - - - - CALL STARTER SCREEN - - - -
+// - - - - PANTALLA DE INICIO DE LLAMADA - - - -
 start();
 
-// - - - - START SCREEN - - - -
+// - - - - Pantalla de inicio- - - -
 function start() {
-  // CREATE START SCREEN
+  // crear pantalla de inicio
 
   start = document.createElement("DIV");
   start.classList.add("start");
 
-  // add header
+  // agregar encabezado
   let startHeader = document.createElement("H1");
   startHeader.classList.add("startHeader");
-  startHeader.textContent = "¿Cómo se juega?";
+  startHeader.textContent = "¿Bienvenido a Monkey in the Jungle?";
 
-  // add info about the game
+  //agregar informacion del juego
   let instructions = document.createElement("DIV");
 
   let firstLine = document.createElement("DIV");
@@ -502,34 +502,34 @@ function start() {
 
   let firstLineText = document.createElement("H2");
   firstLineText.classList.add("instruction-first-line");
-  firstLineText.textContent = "Recoge bananas para las crías de mono.";
+  firstLineText.textContent = "Iniciaras una aventura en la recolecciÓn de bananos para K.O";
 
   firstLine.append(fishImage, firstLineText);
 
   let secondLine = document.createElement("H2");
   secondLine.classList.add("instruction-text");
   secondLine.textContent =
-    "Cuando todos los pequeños tengan una banana, ¡tú ganas!";
+    "Tendrás que alimentar a los bebes monos y cuando todos los pequeños tengan una banana, ¡tú ganas!";
 
   let thirdLine = document.createElement("H2");
   thirdLine.classList.add("instruction-text");
   thirdLine.textContent =
-    "Puedes moverte con las flechas del teclado (← ↑ → ↓) pero asegúrate de evitar a los enemigos.";
+    "Guia rapida : Puedes moverte con las flechas del teclado (← ↑ → ↓)  pero asegúrate de evitar a los enemigos.";
 
   instructions.append(firstLine, secondLine, thirdLine);
 
-  // add new game button
+  // agregar nuevo boton de juego
   let startGameButton = document.createElement("DIV");
   startGameButton.classList.add("startGameButton");
-  startGameButton.textContent = "Comenzar el juego";
+  startGameButton.textContent = "Jugar";
 
-    // acerca de nostros
+    // acerca de nosotros
     let botonAcerca = document.createElement("DIV");
     botonAcerca.classList.add("startGameButton");
-    botonAcerca.textContent = "Acerca de Nosotros";
+    botonAcerca.textContent = "Menú";
 
 
-  // add key press comment
+  //añadir comentario de pulsación de tecla
   let startGameComment = document.createElement("H3");
   startGameComment.classList.add("startGameComment");
   startGameComment.textContent = "Pulse cualquier tecla";
@@ -538,10 +538,10 @@ function start() {
 
   document.body.appendChild(start);
 
-  // disable movement
+  // desactivar el movimiento
   disable();
 
-  // event listeners for new game button - click or keypress
+  // escuchadores de eventos para el nuevo botón del juego - clic o pulsación de tecla
   startGameButton.onclick = function () {
     startGame();
   };
@@ -554,7 +554,7 @@ function start() {
 
   function acerca(){
     
-    window.location.href = "acerca.html"
+    window.location.href = "inicio.html"
   
   }
 
@@ -564,60 +564,60 @@ function start() {
 
 
 
-// - - - - START GAME - - - -
+// - - - - Iniciar juego - - - -
 function startGame() {
   // enable movement
   enable();
 
-  // remove start screen
+  // quitar la pantalla de inicio
   start.style.display = "none";
   start.remove();
 
-  // start timer
+  // iniciar temporizador
   timer();
 
-  // start main music
+  // iniciar música principal
   mainMusic.play();
 }
 
-// - - - - LIFE COUNTER IN STAT PANEL - - - -
+// - - - -CONTADOR DE VIDAS EN EL PANEL DE ESTADÍSTICAS - - - -
 function looseLife() {
-  // remove a heart image
+  // eliminar una imagen de corazón
   let child = document.getElementsByClassName("heart")[player.life];
   child.parentNode.removeChild(child);
 }
 
-// - - - - RESTART FUNCTION - - - -
+// - - - -FUNCIÓN DE REINICIO- - - -
 const restartButton = document.querySelector(".restart");
 
 restartButton.onclick = function () {
   restart();
 };
 
-// restart function, starts a new game
+// función de reinicio, inicia una nueva partida
 function restart() {
   window.removeEventListener("keypress", restart);
 
-  // start main music
+  // iniciar musica principañ
   mainMusic.play();
 
-  // reset timer
+  // reiniciar temporizador
   stopTimer();
 
   document.querySelector(".secCount").textContent = "00";
   document.querySelector(".minCount").textContent = "00";
 
-  // reshuffle fish's x position
+  // reorganizar la posición x del banano
   fishX = shuffle([0, 1, 2, 3, 4, 5, 6]);
 
-  // randomize fish position
+  // aleatorizar la posición de los bananos
   allFish.forEach(function (fish, index) {
     fish.x = fishX[index];
     fish.y = Math.floor(Math.random() * (6 - 3 + 1) + 3);
     fish.grabbed = false;
   });
 
-  // reset and randomize enemies
+  // reiniciar y aleatorizar enemigos
   allEnemies.forEach(function (enemy) {
     enemy.x =
       enemy.direction === 1
@@ -633,12 +633,12 @@ function restart() {
       : Math.floor(Math.random() * 10) + 7;
   polar.y = Math.floor(Math.random() * (polar.max - polar.min + 1) + polar.min);
 
-  // reset baby penguins has fish
+  // restablecer bebé mono tiene banano
   allKids.forEach(function (kid) {
     kid.hasFish = false;
   });
 
-  // reset life
+  //reiniciar vida
   let addLife = player.life === -1 ? 3 : 3 - player.life;
   if (addLife !== 0) {
     let fragment = document.createDocumentFragment();
@@ -651,7 +651,7 @@ function restart() {
     document.querySelector(".life").appendChild(fragment);
   }
 
-  // remove screen if new game initiated from there
+  //quitar la pantalla si se inicia un nuevo juego desde allí
   if (won !== undefined) {
     won.style.display = "none";
     won.remove();
@@ -662,7 +662,7 @@ function restart() {
     lost.remove();
   }
 
-  // reset variables
+  // reiniciar variables
   secCounter = 0;
   minCounter = 0;
   player.x = 3;
@@ -670,25 +670,25 @@ function restart() {
   player.life = 3;
   fishCounter = 0;
 
-  // enable movement
+  // permitir el movimiento
   enable();
 
-  // start timer
+  // iniciar temporizador
   timer();
 }
 
-// - - - - PAUSE BUTTON  - - - -
+// - - - - boton de pausa  - - - -
 const pauseButton = document.querySelector(".pause");
 pauseButton.onclick = function () {
   pause();
 };
 
-// - - - - PAUSE - - -
+// - - - - pausa - - -
 function pause() {
-  // clear timer
+  //limpiar temporizador
   stopTimer();
 
-  // create pause screen
+  // crear pantalla de pausa
   pauseScreen = document.createElement("DIV");
   pauseScreen.classList.add("pause-screen");
 
@@ -702,105 +702,105 @@ function pause() {
 
   document.body.appendChild(pauseScreen);
 
-  // disable movement
+  // desactivar el movimiento
   disable();
 
-  // event listener to resume a game with a keypress or click
+  //para reanudar un juego con una pulsación de tecla o un clic
   window.addEventListener("keydown", resume);
   pauseScreen.onclick = function () {
     resume();
   };
 }
 
-// - - - - RESUME the game after it was paused - - - -
+// - - - - REANUDAR el juego después de haberlo pausado - - - -
 function resume() {
   window.removeEventListener("keypress", resume);
 
-  // hide pause screen and remove
+  // ocultar la pantalla de pausa y eliminar
   if (pauseScreen !== undefined) {
     pauseScreen.style.display = "none";
     pauseScreen.remove();
   }
 
-  // enable movement
+  // permitir el movimiento
   enable();
 
-  // start timer again
+  // iniciar temporizador de nuevo
   timer();
 }
 
-// - - - - VOLUME FUNCTION - - - -
+// - - - - funcion de volumen- - - -
 const volumeButton = document.querySelector(".volume");
 
 volumeButton.onclick = function () {
   let icon = document.querySelector(".volume-icon").classList;
-  // if not muted pause main music and mute all sounds
+  // si no está silenciada, pausa la música principal y silencia todos los sonidos
   if (muted === false) {
     mainMusic.pause();
     allSounds.forEach(function (sound) {
       sound.muted = true;
     });
-    // change icon
+    // cambio de icono
     icon.replace("fa-volume-up", "fa-volume-off");
     muted = true;
   }
-  // if muted start main music unmute sounds
+  //si está silenciado, inicia la música principal, desactiva los sonidos
   else {
     mainMusic.play();
     allSounds.forEach(function (sound) {
       sound.muted = false;
     });
-    // change back icon
+    // icono de retroceso
     icon.replace("fa-volume-off", "fa-volume-up");
     muted = false;
   }
 };
 
-// - - - - DISABLE movement - - - -
+// - - - - DESACTIVAR movimiento - - - -
 function disable() {
-  // set enemies' speed to zero
+  // poner a cero la velocidad de los enemigos
   allEnemies.forEach(function (enemy) {
     enemy.speed = 0;
   });
-  // remove input handler for player
+  // eliminar el controlador de entrada del reproductor
   document.removeEventListener("keyup", movement);
 }
 
-// - - - - ENABLE movement - - - -
+// - - - - ACTIVAR movimiento - - - -
 function enable() {
-  // remove event listener for keypress
+  // eliminar el receptor de eventos de pulsación de tecla
   window.removeEventListener("keypress", resume);
 
-  // add input handler back for player
+  // añadir controlador de entrada de nuevo para el jugador
   document.addEventListener("keyup", movement);
 
-  // reset enemies' speed to original
+  // restablecer la velocidad original de los enemigos
   allEnemies.forEach(function (enemy) {
     enemy.speed = enemy.originalSpeed;
   });
 }
 
-// - - - - WINNER SCREEN - - - -
+// - - - -Pantalla de ganador - - - -
 function win() {
-  // winner music
-  // stop main music
+  //musica de ganar
+  // detenr musica de principa
   mainMusic.pause();
-  // play winner music
+  // tocar musica de jugador
   winSound.play();
 
-  // stop timer
+  //detener temporizador
   stopTimer();
 
-  // create winner screen
+  // crear pantalla de ganador
   won = document.createElement("DIV");
   won.classList.add("winner");
 
-  // add header
+  // agregar encabezado
   let wonHeader = document.createElement("H1");
   wonHeader.classList.add("winnerHeader");
   wonHeader.textContent = "¡Felicidades!";
 
-  // add info about the game
+  // agregar informacion sobre el juego
   let wonText = document.createElement("H2");
   wonText.classList.add("winnerText");
   let wonInfo =
@@ -809,12 +809,12 @@ function win() {
       : "Ganaste en " + minCounter + " min " + secCounter + " seg!";
   wonText.textContent = wonInfo;
 
-  // add new game button
+  // agregar nuevo boton de juego
   let newGameButton = document.createElement("DIV");
   newGameButton.classList.add("newGameButton");
   newGameButton.textContent = "¿Jugar otra vez?";
 
-  // add press key comment
+  // añadir comentario de tecla
   let newGameComment = document.createElement("H3");
   newGameComment.classList.add("newGameComment");
   newGameComment.textContent = "Pulse cualquier tecla";
@@ -823,7 +823,7 @@ function win() {
 
   document.body.appendChild(won);
 
-  // event listeners for new game button - click or keypress
+  // escuchadores de eventos para el nuevo botón del juego - clic o pulsación de tecla
   newGameButton.onclick = function () {
     winSound.pause();
     winSound.currentTime = 0;
@@ -832,34 +832,34 @@ function win() {
   window.addEventListener("keypress", restart);
 }
 
-// GAME OVER SCREEN
+// pantalla de game over
 function loose() {
   // stop main music
   mainMusic.pause();
-  // play game over sound
+  // musica de game over 
   gameOverSound.play();
 
-  // disable movement
+  // desactivar el movimiento
   disable();
 
-  // clear timer
+  // limpiar temporizador
   stopTimer();
 
-  // CREATE GAME OVER SCREEN
+  // crear pantalla de game over
   lost = document.createElement("DIV");
   lost.classList.add("lost");
 
-  // add header
+  // agregar encabezado
   let lostHeader = document.createElement("H1");
   lostHeader.classList.add("lostHeader");
   lostHeader.textContent = "Juego Terminado";
 
-  // add new game button
+  // agregar nuevo boton de juego
   let newGameButton = document.createElement("DIV");
   newGameButton.classList.add("newGameButton");
   newGameButton.textContent = "¿Jugar otra vez?";
 
-  // add key press comment
+  // añadir comentario de pulsación de tecla
   let newGameComment = document.createElement("H3");
   newGameComment.classList.add("newGameComment");
   newGameComment.textContent = "Pulse cualquier tecla";
@@ -868,7 +868,7 @@ function loose() {
 
   document.body.appendChild(lost);
 
-  // event listeners for new game button - click or keypress
+  // escuchadores de eventos para el nuevo botón del juego - clic o pulsación de tecla
   newGameButton.onclick = function () {
     gameOverSound.pause();
     gameOverSound.currentTime = 0;
@@ -877,25 +877,25 @@ function loose() {
   window.addEventListener("keypress", restart);
 }
 
-/* Engine.js
- * This file provides the game loop functionality (update entities and render),
- * draws the initial game board on the screen, and then calls the update and
- * render methods on your player and enemy objects (defined in your app.js).
+/* Motor.js
+ * Este archivo proporciona la funcionalidad del bucle del juego (actualizar entidades y renderizar),
+ * dibuja el tablero inicial en la pantalla, y luego llama a los métodos update y
+ * métodos de render en tus objetos jugador y enemigo (definidos en tu app.js).
  *
- * A game engine works by drawing the entire game screen over and over, kind of
- * like a flipbook you may have created as a kid. When your player moves across
- * the screen, it may look like just that image/character is moving or being
- * drawn but that is not the case. What's really happening is the entire "scene"
- * is being drawn over and over, presenting the illusion of animation.
+ * Un motor de juego funciona dibujando toda la pantalla del juego una y otra vez, algo así como
+ * como un flipbook que puede haber creado como un niño. Cuando el jugador se mueve a través de
+ * la pantalla, puede parecer que sólo esa imagen / personaje se está moviendo o siendo
+ * pero no es así. Lo que realmente sucede es que toda la "escena"
+ * está siendo dibujada una y otra vez, presentando la ilusión de animación.
  *
- * This engine makes the canvas' context (ctx) object globally available to make
- * writing app.js a little simpler to work with.
+ * Este motor hace que el contexto del canvas (ctx) este disponible globalmente para hacer
+ * escribir app.js un poco más simple de trabajar.
  */
 
 var Engine = (function (global) {
-  /* Predefine the variables we'll be using within this scope,
-   * create the canvas element, grab the 2D context for that canvas
-   * set the canvas elements height/width and add it to the DOM.
+  /* Predefine las variables que usaremos en este ámbito,
+   * crear el elemento canvas, coger el contexto 2D para ese canvas
+   * Establece la altura/anchura del elemento canvas y añádelo al DOM.
    */
   var doc = global.document,
     win = global.window,
@@ -907,39 +907,39 @@ var Engine = (function (global) {
   canvas.height = 690;
   doc.body.appendChild(canvas);
 
-  /* This function serves as the kickoff point for the game loop itself
-   * and handles properly calling the update and render methods.
+  /* Esta función sirve como punto de partida para el propio bucle del juego
+   * y se encarga de llamar correctamente a los métodos de actualización y renderizado.
    */
   function main() {
-    /* Get our time delta information which is required if your game
-     * requires smooth animation. Because everyone's computer processes
-     * instructions at different speeds we need a constant value that
-     * would be the same for everyone (regardless of how fast their
-     * computer is) - hurray time!
+    /* Obtenga nuestra información de delta de tiempo que se requiere si su juego
+     * requiere una animación suave. Debido a que cada computadora procesa
+     * instrucciones a diferentes velocidades necesitamos un valor constante que
+     * sea el mismo para todos (independientemente de la velocidad de su
+     * ordenador) - ¡viva el tiempo!
      */
     var now = Date.now(),
       dt = (now - lastTime) / 1000.0;
 
-    /* Call our update/render functions, pass along the time delta to
-     * our update function since it may be used for smooth animation.
+    /* Llama a nuestras funciones update/render, pasa el delta de tiempo a
+     * nuestra función de actualización, ya que puede ser utilizado para la animación suave.
      */
     update(dt);
     render();
 
-    /* Set our lastTime variable which is used to determine the time delta
-     * for the next time this function is called.
+    /* Establece nuestra variable lastTime que se utiliza para determinar el delta de tiempo
+     * para la próxima vez que se llame a esta función.
      */
     lastTime = now;
 
-    /* Use the browser's requestAnimationFrame function to call this
-     * function again as soon as the browser is able to draw another frame.
+    /* Utiliza la función requestAnimationFrame del navegador para llamar a esta
+     * función de nuevo tan pronto como el navegador sea capaz de dibujar otro fotograma.
      */
     win.requestAnimationFrame(main);
   }
 
-  /* This function does some initial setup that should only occur once,
-   * particularly setting the lastTime variable that is required for the
-   * game loop.
+  /* Esta función realiza algunas configuraciones iniciales que sólo deberían ocurrir una vez,
+   * en particular el establecimiento de la variable lastTime que se requiere para la
+   * bucle de juego.
    */
   function init() {
     reset();
@@ -947,26 +947,26 @@ var Engine = (function (global) {
     main();
   }
 
-  /* This function is called by main (our game loop) and itself calls all
-   * of the functions which may need to update entity's data. Based on how
-   * you implement your collision detection (when two entities occupy the
-   * same space, for instance when your character should die), you may find
-   * the need to add an additional function call here. For now, we've left
-   * it commented out - you may or may not want to implement this
-   * functionality this way (you could just implement collision detection
-   * on the entities themselves within your app.js file).
+  /* Esta función es llamada por main (nuestro bucle de juego) y ella misma llama a todas
+   * de las funciones que pueden necesitar para actualizar los datos de la entidad. Basado en cómo
+   * la detección de colisiones (cuando dos entidades ocupan el mismo espacio, por ejemplo, cuando tu personaje debe morir).
+   * mismo espacio, por ejemplo cuando tu personaje debe morir), puede que encuentres
+   * la necesidad de añadir una llamada de función adicional aquí. Por ahora, hemos dejado
+   * comentada - puede que quieras o no implementar esta
+   * funcionalidad de esta manera (podrías simplemente implementar la detección de colisiones
+   * en las propias entidades dentro de tu archivo app.js).
    */
   function update(dt) {
     updateEntities(dt);
-    // checkCollisions();
+    // comprobarColisiones();
   }
 
-  /* This is called by the update function and loops through all of the
-   * objects within your allEnemies array as defined in app.js and calls
-   * their update() methods. It will then call the update function for your
-   * player object. These update methods should focus purely on updating
-   * the data/properties related to the object. Do your drawing in your
-   * render methods.
+  /* Esto es llamado por la función de actualización y bucles a través de todos los
+   * objetos dentro de su allEnemies matriz como se define en app.js y llamadas
+   * sus métodos update(). A continuación, llamará a la función de actualización para su
+   * objeto jugador. Estos métodos de actualización deben centrarse exclusivamente en la actualización de
+   * los datos/propiedades relacionados con el objeto. Haga su dibujo en su
+   * métodos de render.
    */
   function updateEntities(dt) {
     allEnemies.forEach(function (enemy) {
@@ -978,15 +978,15 @@ var Engine = (function (global) {
     });
   }
 
-  /* This function initially draws the "game level", it will then call
-   * the renderEntities function. Remember, this function is called every
-   * game tick (or loop of the game engine) because that's how games work -
-   * they are flipbooks creating the illusion of animation but in reality
-   * they are just drawing the entire screen over and over.
+  /*Esta función inicialmente dibuja el "nivel del juego", luego llamará a
+   * la función renderEntities. Recuerde, esta función es llamada cada
+   * tick del juego (o bucle del motor del juego) porque así es como funcionan los juegos -
+   * son flipbooks creando la ilusión de animación pero en realidad
+   * están dibujando toda la pantalla una y otra vez.
    */
   function render() {
-    /* This array holds the relative URL to the image used
-     * for that particular row of the game level.
+    /* Esta matriz contiene la URL relativa a la imagen utilizada
+     * para esa fila en particular del nivel de juego.
      */
     var rowImages = [
         "./Pastoverde.png",
@@ -1002,21 +1002,21 @@ var Engine = (function (global) {
       row,
       col;
 
-    // Before drawing, clear existing canvas
+    // Antes de dibujar, borra el lienzo existente
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    /* Loop through the number of rows and columns we've defined above
-     * and, using the rowImages array, draw the correct image for that
-     * portion of the "grid"
+    /* Recorre el número de filas y columnas que hemos definido anteriormente
+     * y, utilizando la matriz rowImages, dibujar la imagen correcta para que
+     * parte de la "cuadrícula
      */
     for (row = 0; row < numRows; row++) {
       for (col = 0; col < numCols; col++) {
-        /* The drawImage function of the canvas' context element
-         * requires 3 parameters: the image to draw, the x coordinate
-         * to start drawing and the y coordinate to start drawing.
-         * We're using our Resources helpers to refer to our images
-         * so that we get the benefits of caching these images, since
-         * we're using them over and over.
+        /* La función drawImage del elemento contextual del lienzo
+         * requiere 3 parámetros: la imagen a dibujar, la coordenada x
+         * para empezar a dibujar y la coordenada y para empezar a dibujar.
+         * Estamos usando nuestros ayudantes Resources para referirnos a nuestras imágenes
+         * para que podamos obtener los beneficios de almacenamiento en caché de estas imágenes, ya que
+         * las estamos usando una y otra vez.
          */
         ctx.drawImage(Resources.get(rowImages[row]), col * 97, row * 83);
       }
@@ -1025,13 +1025,13 @@ var Engine = (function (global) {
     renderEntities();
   }
 
-  /* This function is called by the render function and is called on each game
-   * tick. Its purpose is to then call the render functions you have defined
-   * on your enemy and player entities within app.js
+  /* Esta función es llamada por la función de render y es llamada en cada juego
+   * juego. Su propósito es llamar a las funciones de render que hayas definido
+   * en tus entidades enemigas y jugadoras dentro de app.js
    */
   function renderEntities() {
-    /* Loop through all of the objects within the allEnemies array and call
-     * the render function you have defined.
+    /* Recorre todos los objetos dentro de la matriz de todos los enemigos y llama a
+     * la función de renderizado que hayas definido.
      */
 
     allKids.forEach(function (kids) {
@@ -1049,17 +1049,17 @@ var Engine = (function (global) {
     });
   }
 
-  /* This function does nothing but it could have been a good place to
-   * handle game reset states - maybe a new game menu or a game over screen
-   * those sorts of things. It's only called once by the init() method.
+  /*Esta función no hace nada, pero podría haber sido un buen lugar para
+   * manejar los estados de reinicio del juego - tal vez un nuevo menú de juego o una pantalla de game over
+   * ese tipo de cosas. Sólo es llamada una vez por el método init().
    */
   function reset() {
     // noop
   }
 
-  /* Go ahead and load all of the images we know we're going to need to
-   * draw our game level. Then set init as the callback method, so that when
-   * all of these images are properly loaded our game will start.
+  /*Seguir adelante y cargar todas las imágenes que sabemos que vamos a necesitar para
+   * dibujar nuestro nivel de juego. A continuación, establezca init como el método de devolución de llamada, de modo que cuando
+   * todas estas imágenes se cargan correctamente nuestro juego se iniciará.
    */
   Resources.load([
     "./Pastoverde.png",
@@ -1074,9 +1074,9 @@ var Engine = (function (global) {
   ]);
   Resources.onReady(init);
 
-  /* Assign the canvas' context object to the global variable (the window
-   * object when run in a browser) so that developers can use it more easily
-   * from within their app.js files.
+  /* Asignar el objeto de contexto del lienzo a la variable global (la ventana
+   * cuando se ejecuta en un navegador) para que los desarrolladores puedan utilizarlo más fácilmente
+   * desde dentro de sus archivos app.js.
    */
   global.ctx = ctx;
 })(this);
